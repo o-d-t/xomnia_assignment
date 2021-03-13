@@ -6,6 +6,12 @@ from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
 
+# Read data from database into application instance.
+db = ShippySQLite()
+raw_messages_stations = db.read_table_to_df('raw_messages_stations',
+                                            parse_dates=['datetime']).set_index(['device_id', 'datetime'])
+weather_data = db.read_table_to_df('weather_data',
+                                   parse_dates=['timestamp_utc']).set_index('timestamp_utc')
 
 @app.route('/')
 def root():
@@ -56,13 +62,6 @@ if __name__ == '__main__':
     # the "static" directory. See:
     # http://flask.pocoo.org/docs/1.0/quickstart/#static-files. Once deployed,
     # App Engine itself will serve those files as configured in app.yaml.
-    db = ShippySQLite()
-
-    raw_messages_stations = db.read_table_to_df('raw_messages_stations',
-                                                parse_dates=['datetime']).set_index(['device_id', 'datetime'])
-    weather_data = db.read_table_to_df('weather_data',
-                                       parse_dates=['timestamp_utc']).set_index('timestamp_utc')
-
     app.run(host='127.0.0.1', port=8080, debug=True)
 # [END gae_python3_render_template]
 # [END gae_python38_render_template]
