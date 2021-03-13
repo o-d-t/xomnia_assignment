@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+  <title>Xomnia Data Engineer Assignment</title>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <h4><a href="/num_ships_in_data">For how many ships do we have available data?</a></h4>
+  {{ num_ships_in_data }}
+  <h4><a href="/avg_speeds_for_date">Avg speed for all available ships for each hour of the date 2019-02-13.</a></h4>
+  {{ avg_speeds_for_date|safe }}
+  <h4><a href="/wind_speed_max_min">Max & min wind speed for every available day for ship ”st-1a2090” only.</a></h4>
+  {{ wind_speed_max_min|safe }}
+  <h4><a href="/full_weather_visual">A way to visualize full weather conditions across route of the ship ”st-1a2090” for date 2019-02-13.</a></h4>
+  {{ full_weather_visual|safe }}
+
+</body>
+</html>
